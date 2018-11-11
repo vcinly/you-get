@@ -399,7 +399,7 @@ def download_video_from_totallist(url, page, **kwargs):
                 videotitle = videos[i]["title"]
                 videourl = "https://www.bilibili.com/video/av{}".format(videoid)
                 print("Start downloading ", videotitle, " video ", videotitle)
-                kwargs["output_dir"] = kwargs["output_dir"] + '/' + str(videoid)
+                kwargs["output_dir"] = kwargs["old_output_dir"] + '/' + str(videoid)
                 download_cover(videos[i]['pic'], videotitle, **kwargs)
                 Bilibili().download_by_url(videourl, subtitle=videotitle, **kwargs)
             if page < jsonresult['pages']:
@@ -436,6 +436,7 @@ def bilibili_download_playlist_by_url(url, **kwargs):
         # this a fav list folder
         download_video_from_favlist(url, **kwargs)
     elif 'video' in url:
+        kwargs["old_output_dir"] = kwargs["output_dir"]
         download_video_from_totallist(url, 1, **kwargs)
     else:
         aid = re.search(r'av(\d+)', url).group(1)
