@@ -402,7 +402,7 @@ def download_video_from_totallist(url, page, **kwargs):
                 kwargs["output_dir"] = kwargs["output_dir"] + '/' + str(videoid)
                 download_cover(videos[i]['pic'], videotitle, **kwargs)
                 Bilibili().download_by_url(videourl, subtitle=videotitle, **kwargs)
-            if page <= jsonresult['pages']:
+            if page < jsonresult['pages']:
                 page += 1
                 download_video_from_totallist(url, page, **kwargs)
         else:
