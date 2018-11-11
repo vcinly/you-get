@@ -5,6 +5,7 @@ from .common import print_more_compatible as print
 from .util import log
 from . import json_output
 import os
+import time
 
 class Extractor():
     def __init__(self, *args):
@@ -222,6 +223,9 @@ class VideoExtractor():
                 headers['User-Agent'] = self.ua
             if self.referer is not None:
                 headers['Referer'] = self.referer
+            if kwargs["delay"] > 0:
+                print("Download delay", str(kwargs["delay"]), 'seconds, start from', time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime()))
+                time.sleep(kwargs["delay"])
             download_urls(urls, self.title, ext, total_size, headers=headers,
                           output_dir=kwargs['output_dir'],
                           merge=kwargs['merge'],

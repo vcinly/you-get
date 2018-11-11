@@ -1417,6 +1417,10 @@ def script_main(download, download_playlist, **kwargs):
         '-a', '--auto-rename', action='store_true', default=False,
         help='Auto rename same name different files'
     )
+    download_grp.add_argument(
+        '-D', '--delay', metavar='SECONDS', type=int, default=0,
+        help='Set download delay'
+    )
 
     proxy_grp = parser.add_argument_group('Proxy options')
     proxy_grp = proxy_grp.add_mutually_exclusive_group()
@@ -1527,7 +1531,7 @@ def script_main(download, download_playlist, **kwargs):
             URLs, args.playlist,
             output_dir=args.output_dir, merge=not args.no_merge,
             info_only=info_only, json_output=json_output, caption=caption,
-            password=args.password,
+            password=args.password, delay=args.delay,
             **extra
         )
     except KeyboardInterrupt:
