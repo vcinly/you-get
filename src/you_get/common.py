@@ -668,9 +668,9 @@ def url_save(
     else:
         open_mode = 'wb'
         
-    if kwargs["delay"] > 0:
-      print("Download delay", str(kwargs["delay"]), 'seconds, start from', time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime()))
-      time.sleep(kwargs["delay"])
+    if 'delay' in kwargs and kwargs['delay']:
+      print("Download delay", str(kwargs['delay']), 'seconds, start from', time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime()))
+      time.sleep(kwargs['delay'])
 
     for url in urls:
         received_chunk = 0
