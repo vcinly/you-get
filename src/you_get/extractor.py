@@ -223,13 +223,13 @@ class VideoExtractor():
                 headers['User-Agent'] = self.ua
             if self.referer is not None:
                 headers['Referer'] = self.referer
-            if kwargs["delay"] > 0:
-                print("Download delay", str(kwargs["delay"]), 'seconds, start from', time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime()))
-                time.sleep(kwargs["delay"])
+            # if kwargs["delay"] > 0:
+            #     print("Download delay", str(kwargs["delay"]), 'seconds, start from', time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime()))
+            #     time.sleep(kwargs["delay"])
             download_urls(urls, self.title, ext, total_size, headers=headers,
                           output_dir=kwargs['output_dir'],
                           merge=kwargs['merge'],
-                          av=stream_id in self.dash_streams)
+                          av=stream_id in self.dash_streams, delay=kwargs['delay'])
             if 'caption' not in kwargs or not kwargs['caption']:
                 print('Skipping captions or danmuku.')
                 return

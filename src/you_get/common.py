@@ -667,6 +667,10 @@ def url_save(
                 bar.update_received(os.path.getsize(temp_filepath))
     else:
         open_mode = 'wb'
+        
+    if 'delay' in kwargs and kwargs['delay']:
+      print("Download delay", str(kwargs['delay']), 'seconds, start from', time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime()))
+      time.sleep(kwargs['delay'])
 
     for url in urls:
         received_chunk = 0
